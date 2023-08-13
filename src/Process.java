@@ -3,14 +3,19 @@ public class Process {
     private int ArrTime;
     private int SrvTime;
     private int Priority;
+    private int PIDInt;
 
     public Process(String PID, int arrTime,
-                   int srvTime, int priority ){
+                   int srvTime, int priority, int PIDInt_ ){
 
         this.PID = PID;
         this.ArrTime = arrTime;
         this.SrvTime = srvTime;
         this.Priority = priority;
+        this.PIDInt = PIDInt_;
+
+
+
     }
 
 
@@ -46,4 +51,8 @@ public class Process {
     public void setPID(String PID) {
         this.PID = PID;
     }
+    public int getPIDInt(){
+        return PIDInt;
+    }
+
 }

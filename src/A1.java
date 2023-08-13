@@ -12,17 +12,18 @@ public class A1 {
         A1 test = new A1();
         //test.readFileData(args[0]);
 
-        test.exe(test.readFileData(args[0]));
+        test.exe(test.getProcessesFromData(args[0]));
 
     }
 
     public void exe(ArrayList<Process> processes){
   
         for(int i = 0; i < processes.size(); i++){
-            System.out.println("Process "+ i +" "+processes.get(i).getPID());
+            if(i == 0 ) continue;
+            System.out.println("Process "+ i +" "+processes.get(i).getPIDInt());
         }
     }
-    public ArrayList<Process> readFileData(String file){
+    public ArrayList<Process> getProcessesFromData(String file){
         ArrayList<Process> processes = new ArrayList<>();
         
         int DISP = 0;
@@ -31,6 +32,7 @@ public class A1 {
         int arr_time = 0;
         int srv_time = 0;
         int priority = 0;
+        int pidInt = 0;
     
         try{ 
             Scanner reader = new Scanner( new File(file));
@@ -38,7 +40,11 @@ public class A1 {
                 String line = reader.nextLine();
                 if(line.contains("DISP")) DISP = Integer.parseInt(line.substring(6));
 
-                if(line.contains("PID")) pid = line.substring(5);
+                if(line.contains("PID")){
+                    pid = line.substring(5);
+                    pidInt = Integer.parseInt(line.substring(6));
+                }
+
                 
                 if(line.contains("ArrTime")) arr_time = Integer.parseInt(line.substring(9));
                 
@@ -47,7 +53,7 @@ public class A1 {
                 if(line.contains("Priority")) priority = Integer.parseInt(line.substring(10));
                 
                 // end of process data - create new process and add to arraylist
-                if(line.contains("END")) processes.add((new Process(pid, arr_time, srv_time, priority)));
+                if(line.contains("END")) processes.add((new Process(pid, arr_time, srv_time, priority, pidInt)));
                      
             }
 
