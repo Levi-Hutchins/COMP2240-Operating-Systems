@@ -10,14 +10,19 @@ public class A1 {
         }
         System.out.println(args[0]);
         A1 test = new A1();
-        test.readFileData(args[0]);
+        //test.readFileData(args[0]);
+
+        test.exe(test.readFileData(args[0]));
+
     }
 
-    public void exe(String[] ags){
+    public void exe(ArrayList<Process> processes){
   
-        return;
+        for(int i = 0; i < processes.size(); i++){
+            System.out.println("Process "+ i +" "+processes.get(i).getPID());
+        }
     }
-    public void readFileData(String file){
+    public ArrayList<Process> readFileData(String file){
         ArrayList<Process> processes = new ArrayList<>();
         
         int DISP = 0;
@@ -27,12 +32,10 @@ public class A1 {
         int srv_time = 0;
         int priority = 0;
     
-
         try{ 
             Scanner reader = new Scanner( new File(file));
             while(reader.hasNextLine()){
                 String line = reader.nextLine();
-
                 if(line.contains("DISP")) DISP = Integer.parseInt(line.substring(6));
 
                 if(line.contains("PID")) pid = line.substring(5);
@@ -45,19 +48,17 @@ public class A1 {
                 
                 // end of process data - create new process and add to arraylist
                 if(line.contains("END")) processes.add((new Process(pid, arr_time, srv_time, priority)));
-                
-                
-
-                
+                     
             }
 
         }
         catch(FileNotFoundException e){ System.out.println("An Error Occured");}
         
 
-        for(Process p: processes ){
-            System.out.println(p.getPID());
-        }
+        // for(Process p: processes ){
+        //     System.out.println(p.getPID());
+        // }
+        return processes;
     }
     
 }
