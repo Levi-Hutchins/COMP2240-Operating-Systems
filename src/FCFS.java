@@ -15,16 +15,29 @@ public class FCFS{
 
     }
 
+    /*
+     * Desc: this function returns the index of the process next in line. FCFS
+     * adopts FIFO strategy so we sort based on arrival time. If two processes
+     * have the same arrival time they are compared based on ID
+     * @param: N/A
+     * @return: N/A
+     * Precondition: currentProcesses must be populated  
+     * Postcondition: returns index of next process in line
+     */
     public int getNextProcessIndex(){
-
+    // assume first process is earliest
     int earliestArrival = currentProcesses.get(0).getArrTime();
     int arrIndex = 0;
 
     for (int i = 0; i < currentProcesses.size(); i++){
+        // if current process arrival time is less the earliest arrival 
+        // set that to the new earliest arrival time and change index value
         if(currentProcesses.get(i).getArrTime() < earliestArrival){
             earliestArrival = currentProcesses.get(i).getArrTime();
             arrIndex = i;
         }
+        // If two processes have the same arrival compare based on IDs
+        // process IDs are compared based on their int vals eg. (p2 < p3)
         if(currentProcesses.get(i).getArrTime() == earliestArrival){
             if (currentProcesses.get(i).getPIDInt() < currentProcesses.get(arrIndex).getPIDInt()){
                 earliestArrival = currentProcesses.get(i).getArrTime();
@@ -34,38 +47,52 @@ public class FCFS{
 
         }
     }
+    // return index of next process to be loaded
     return arrIndex;
     }
 
     
-
+    /*
+     * Desc: executes the FCFS algorithm and calls the toString function for output
+     * @param: N/A
+     * @return: N/A
+     * Precondition: there must be a list of processes 
+     * Postcondition: completedProcesses equals currentProcesses original size
+     */
     public void runAlgorithm(){
         Process currentItem;
         int currTime = 0;
-        System.out.println(currentProcesses.size());
-        
+        // loop while there are processes left        
         while(currentProcesses.size() != 0){
-            if(currentProcesses.size() > 0){
-                
-                int nextProcessIndex = getNextProcessIndex();
-                System.out.println(nextProcessIndex);
-                currTime += this.DISP;
-                currentItem = currentProcesses.get(nextProcessIndex);
-                currentItem.setStartTime(currTime);
+            //if(currentProcesses.size() > 0){
+              
+            // get the next index based on FCFS algorithm     
+            int nextProcessIndex = getNextProcessIndex();
+            currTime += this.DISP;
+            // add service time to current time 
+            currentItem = currentProcesses.get(nextProcessIndex);
+            currentItem.setStartTime(currTime);
+            // add process finish time to the process
+            currTime += currentItem.getSrvTime();
+            currentItem.setFinishTime(currTime);
+            // add completed process to ordered list and completed list
+            processOrder.add(currentItem);
+            completedProcesses.add(currentItem);
+            currentProcesses.remove(nextProcessIndex); // remove completed process
 
-                currTime += currentItem.getSrvTime();
-                currentItem.setFinishTime(currTime);
-
-                processOrder.add(currentItem);
-                completedProcesses.add(currentItem);
-                currentProcesses.remove(nextProcessIndex);
-
-            }
+            //}
          }
         System.out.println("Done");
         algorithmToString();
 
     }
+    /*
+     * Desc: 
+     * @param: 
+     * @return: 
+     * Precondition:  
+     * Postcondition: 
+     */
     public void algorithmToString(){
         System.out.println("FCFS");
         for(Process p: processOrder){
