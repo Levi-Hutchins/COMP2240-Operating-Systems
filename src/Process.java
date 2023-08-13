@@ -16,6 +16,9 @@ public class Process {
         this.Priority = priority;
         this.PIDInt = PIDInt_;
 
+        this.startTime = 0;
+        this.finishTime = 0;
+
 
 
     }
@@ -55,6 +58,18 @@ public class Process {
     }
     public int getPIDInt(){
         return PIDInt;
+    }
+    public int getStartTime(){
+        return this.startTime;
+    }
+    public void setStartTime(int start_){
+        this.startTime = start_;
+    }
+    public int getFinishTime(){
+        return this.finishTime;
+    }
+    public void setFinishTime(int finish_){
+        this.finishTime = finish_;
     }
 
 }

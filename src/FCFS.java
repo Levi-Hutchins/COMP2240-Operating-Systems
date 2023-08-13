@@ -3,7 +3,7 @@ import java.util.List;
 
 public class FCFS{
     ArrayList<Process> currentProcesses;
-    ArrayList<Process> completedProcesses;
+    ArrayList<Process> completedProcesses = new ArrayList<Process>();
     ArrayList<Process> processOrder = new ArrayList<Process>();
     int DISP;
 
@@ -17,7 +17,7 @@ public class FCFS{
 
     public int getNextProcessIndex(){
 
-    int earliestArrival = this.currentProcesses.get(0).getArrTime();
+    int earliestArrival = currentProcesses.get(0).getArrTime();
     int arrIndex = 0;
 
     for (int i = 0; i < currentProcesses.size(); i++){
@@ -40,50 +40,40 @@ public class FCFS{
     
 
     public void runAlgorithm(){
-        int time = 0;
         Process currentItem;
-        fcfs();
+        int currTime = 0;
+        System.out.println(currentProcesses.size());
+        
+        while(currentProcesses.size() != 0){
+            if(currentProcesses.size() > 0){
+                
+                int nextProcessIndex = getNextProcessIndex();
+                System.out.println(nextProcessIndex);
+                currTime += this.DISP;
+                currentItem = currentProcesses.get(nextProcessIndex);
+                currentItem.setStartTime(currTime);
 
-        for (int i = 0; i < processOrder.size(); i ++){
-            if (i == 0) continue;
-            System.out.println("Process ID " +processOrder.get(i).getPID());
-            System.out.println("Process ArrTime " +processOrder.get(i).getArrTime());
-            System.out.println("Process SrvTime "  +processOrder.get(i).getSrvTime());
-            System.out.println("Process Priority " +processOrder.get(i).getPriority());
-            System.out.println("---------------------" );
+                currTime += currentItem.getSrvTime();
+                currentItem.setFinishTime(currTime);
 
+                processOrder.add(currentItem);
+                completedProcesses.add(currentItem);
+                currentProcesses.remove(nextProcessIndex);
 
-        }   
-
-        // while(currentProcesses.size() < completedProcesses.size()){
-
-        //     if(currentProcesses.size() > 0){
-        //         currentItem = currentProcesses.get(getNextProcessIndex());
-        //         time += this.DISP;
-
-        //     }
-        // }
+            }
+         }
+        System.out.println("Done");
+        algorithmToString();
 
     }
-    public ArrayList<Process> fcfs() {
-    int currentTime = 0;
+    public void algorithmToString(){
+        System.out.println("FCFS");
+        for(Process p: processOrder){
 
-    for (Process process : currentProcesses) {
-        currentTime =DISP;
-        if (currentTime < process.getArrTime()) {
-            currentTime = process.getArrTime();
+            System.out.println("T"+p.getStartTime()+ ": "+p.getPID()+"("+p.getPriority()+")");
         }
-        //currentTime += DISP;
-
-        process.setArrTime(currentTime);
-        currentTime += process.getSrvTime();
-        ///process.finishTime = currentTime;
-
-        processOrder.add(process);
     }
-
-    return processOrder;
-}
+    
 
     
 
