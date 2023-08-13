@@ -4,6 +4,8 @@ public class Process {
     private int SrvTime;
     private int Priority;
     private int PIDInt;
+    private int startTime;
+    private int finishTime;
 
     public Process(String PID, int arrTime,
                    int srvTime, int priority, int PIDInt_ ){

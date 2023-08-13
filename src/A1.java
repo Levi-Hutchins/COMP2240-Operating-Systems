@@ -8,21 +8,37 @@ public class A1 {
         if (args.length != 1){
             throw new IllegalArgumentException("Please Enter Data File");
         }
-        System.out.println(args[0]);
         A1 test = new A1();
         //test.readFileData(args[0]);
-
-        test.exe(test.getProcessesFromData(args[0]));
+        int DISP = test.getDISP(args[0]);
+        test.exe(test.getProcessesFromData(args[0]), DISP);
 
     }
 
-    public void exe(ArrayList<Process> processes){
+    public void exe(ArrayList<Process> processes, int DISP){
+
+           FCFS fcfs = new FCFS(processes, DISP);
+           fcfs.runAlgorithm();
+
   
-        for(int i = 0; i < processes.size(); i++){
-            if(i == 0 ) continue;
-            System.out.println("Process "+ i +" "+processes.get(i).getPIDInt());
-        }
+        // for(int i = 0; i < processes.size(); i++){
+        //     if(i == 0 ) continue;
+        //     System.out.println("Process "+ i +" "+processes.get(i).getPIDInt());
+        // }
     }
+    public int getDISP(String file){
+        int DISP = 0;
+        try{
+            Scanner reader = new Scanner(new File(file));
+            while(reader.hasNextLine()){
+                String line = reader.nextLine();
+                if(line.contains("DISP")) DISP = Integer.parseInt(line.substring(6));
+            }
+        }catch(FileNotFoundException e){System.out.println("An Error Occured");}
+        return DISP;
+
+    }
+
     public ArrayList<Process> getProcessesFromData(String file){
         ArrayList<Process> processes = new ArrayList<>();
         
@@ -64,7 +80,9 @@ public class A1 {
         // for(Process p: processes ){
         //     System.out.println(p.getPID());
         // }
+
         return processes;
     }
+  
     
 }
