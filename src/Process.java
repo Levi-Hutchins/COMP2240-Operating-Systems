@@ -6,6 +6,8 @@ public class Process {
     private int PIDInt;
     private int startTime;
     private int finishTime;
+    private int turnAroundTime;
+    private int waitTime;
 
     public Process(String PID, int arrTime,
                    int srvTime, int priority, int PIDInt_ ){
@@ -18,6 +20,8 @@ public class Process {
 
         this.startTime = 0;
         this.finishTime = 0;
+        this.turnAroundTime = 0;
+        this.waitTime = 0;
 
 
 
@@ -70,6 +74,18 @@ public class Process {
     }
     public void setFinishTime(int finish_){
         this.finishTime = finish_;
+    }
+    public int getTurnAroundTime(){
+        return this.turnAroundTime;
+    }
+    public void setTurnAroundTime(int time_){
+        this.turnAroundTime = time_;
+    }
+    public void setWaitingTime(int time_){
+        this.waitTime = time_;
+    }
+    public int getWaitTime(){
+        return this.waitTime;
     }
 
 }

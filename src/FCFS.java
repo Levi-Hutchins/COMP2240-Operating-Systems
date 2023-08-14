@@ -4,6 +4,8 @@ import java.util.List;
 public class FCFS{
     ArrayList<Process> currentProcesses;
     ArrayList<Process> completedProcesses = new ArrayList<Process>();
+    ArrayList<Process> originalProcesses = new ArrayList<Process>();
+
     ArrayList<Process> processOrder = new ArrayList<Process>();
     int DISP;
 
@@ -11,6 +13,7 @@ public class FCFS{
 
     public FCFS(ArrayList<Process> currentProcesses_, int DISP_){
         this.currentProcesses = currentProcesses_;
+        this.originalProcesses = currentProcesses_;
         this.DISP = DISP_;
 
     }
@@ -71,11 +74,14 @@ public class FCFS{
             currTime += this.DISP;
             // add service time to current time 
             currentItem = currentProcesses.get(nextProcessIndex);
+            currentItem.setWaitingTime(currTime);
             currentItem.setStartTime(currTime);
             // add process finish time to the process
             currTime += currentItem.getSrvTime();
             currentItem.setFinishTime(currTime);
             // add completed process to ordered list and completed list
+
+            currentItem.setTurnAroundTime(currentItem.getFinishTime()-currentItem.getArrTime());
             processOrder.add(currentItem);
             completedProcesses.add(currentItem);
             currentProcesses.remove(nextProcessIndex); // remove completed process
@@ -94,11 +100,30 @@ public class FCFS{
      * Postcondition: 
      */
     public void algorithmToString(){
-        System.out.println("FCFS");
-        for(Process p: processOrder){
+        System.out.println("FCFS:");
+        for(Process p: originalProcesses){
 
             System.out.println("T"+p.getStartTime()+ ": "+p.getPID()+"("+p.getPriority()+")");
         }
+        System.out.println();
+        System.out.println("Process  Turnaround Time  Time Waiting");
+        String processFig = "";
+
+        for(Process p: originalProcesses){
+
+            //System.out.println(p.getPID());
+            processFig += p.getPID();
+            
+            processFig += (" ".repeat(7));
+            processFig += p.getTurnAroundTime();
+            if((Integer.toString(p.getTurnAroundTime()).length() == 1)) processFig += (" ".repeat(17));
+            else processFig += (" ".repeat(16));
+            processFig += p.getWaitTime();
+            processFig +="\n";
+
+        }
+        System.out.print(processFig);
+
     }
     
 
