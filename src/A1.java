@@ -17,10 +17,10 @@ public class A1 {
 
     public void exe(ArrayList<Process> processes, int DISP){
 
-           FCFS fcfs = new FCFS(processes, DISP);
-           // fcfs.runAlgorithm(); - Done Works
-           SPN spn = new SPN(processes, DISP);
-           spn.runAlgorithm();
+        FCFS fcfs = new FCFS(processes, DISP);
+        //fcfs.runAlgorithm(); //- Done Works
+        SPN spn = new SPN(processes, DISP);
+        spn.runAlgorithm();
 
   
         // for(int i = 0; i < processes.size(); i++){

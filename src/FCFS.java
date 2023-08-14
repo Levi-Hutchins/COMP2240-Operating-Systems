@@ -74,7 +74,7 @@ public class FCFS{
             currTime += this.DISP;
             // add service time to current time 
             currentItem = currentProcesses.get(nextProcessIndex);
-            currentItem.setWaitingTime(currTime);
+            currentItem.setWaitingTime(currTime-currentItem.getArrTime());
             currentItem.setStartTime(currTime);
             // add process finish time to the process
             currTime += currentItem.getSrvTime();
@@ -101,7 +101,7 @@ public class FCFS{
      */
     public void algorithmToString(){
         System.out.println("FCFS:");
-        for(Process p: originalProcesses){
+        for(Process p: processOrder){
 
             System.out.println("T"+p.getStartTime()+ ": "+p.getPID()+"("+p.getPriority()+")");
         }
@@ -109,7 +109,7 @@ public class FCFS{
         System.out.println("Process  Turnaround Time  Time Waiting");
         String processFig = "";
 
-        for(Process p: originalProcesses){
+        for(Process p: processOrder){
 
             //System.out.println(p.getPID());
             processFig += p.getPID();
