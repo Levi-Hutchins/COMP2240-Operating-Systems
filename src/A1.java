@@ -25,10 +25,10 @@ public class A1 {
         //spn.runAlgorithm(); // - Done Tests Passed
         PP pp = new PP(processes, DISP);
         //pp.runAlgorithm();
-        //PreemptivePriority pptest = new PreemptivePriority(processes);
-        //pptest.test2();
-        PRRT prr = new PRRT(processes, DISP);
-        prr.test2();
+        PreemptivePriority pptest = new PreemptivePriority(processes);
+        pptest.myTest();
+        //PRR prr = new PRR(processes, DISP);
+        //prr.runAlgorithm();
 
   
         // for(int i = 0; i < processes.size(); i++){

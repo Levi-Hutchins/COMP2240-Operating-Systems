@@ -1,19 +1,26 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 public class PreemptivePriority {
 
     private ArrayList<Process> processList;
-    private ArrayList<Process> readyQueue;
+    private ArrayList<Process> readyQueue = new ArrayList<Process>();
     private ArrayList<Process> processOrder = new ArrayList<Process>();
+    private ArrayList<Process> notArrived;
     private int DISP;
     private int currentTime;
     private Process currentProcess;
 
-    public PreemptivePriority(ArrayList<Process> processes) {
-        this.processList = new ArrayList<>(processes);
-        this.readyQueue = new ArrayList<>();
+    public PreemptivePriority(ArrayList<Process> currentProcesses) {
+        this.processList = new ArrayList<>(currentProcesses);
+        this.notArrived = new ArrayList<>(currentProcesses);
+
         this.currentTime = 0;
         this.currentProcess = null;
         this.DISP =1;
@@ -297,7 +304,7 @@ public class PreemptivePriority {
                     if (currentProcess != null) {
                         readyQueue.add(currentProcess);
                         currentProcess = null;
-                        continue;
+                        currentTime += this.DISP;
                     }
                     currentProcess = readyQueue.remove(0);
 
@@ -310,7 +317,7 @@ public class PreemptivePriority {
                     // Decrease remaining service time for the current process
  
                     currentProcess.decreaseServTime();
-
+                    currentTime += DISP;
 
 
                     if (currentProcess.getSrvTime() == 0) {
@@ -324,19 +331,115 @@ public class PreemptivePriority {
                     }
                     
                 }
+                
         
             }
             System.out.println("");
             for(Process p: processOrder){
                 System.out.println(p.getPID()+" "+p.getStartTime());
-            }
-
-            
-            
+            } 
 
         }
 
-        
+
+
+        public void myTest(){
+            int currentTime = 0; // Initialize to 0
+
+    while (!processList.isEmpty() || !readyQueue.isEmpty() || currentProcess != null) {
+
+        // Add processes that have arrived to the ready queue
+        for (int i = 0; i < processList.size(); i++) {
+            Process p = processList.get(i);
+            if (p.getArrTime() <= currentTime) {
+                readyQueue.add(p);
+                processList.remove(p);
+                i--;
+            }
+        }
+
+        // Sort the ready queue by priority
+        Collections.sort(readyQueue, new Comparator<Process>() {
+            public int compare(Process p1, Process p2) {
+                return Integer.compare(p1.getPriority(), p2.getPriority());
+            }
+        });
+
+        // Check for preemption
+        if (currentProcess == null || (!readyQueue.isEmpty() && readyQueue.get(0).getPriority() < currentProcess.getPriority())) {
+            if (currentProcess != null) {
+                readyQueue.add(currentProcess);
+            }
+
+            currentProcess = readyQueue.remove(0);
+
+            currentTime += this.DISP; // Move this line here
+            if(currentProcess.getStartTime() == 0) {
+                currentProcess.setStartTime(currentTime);
+                processOrder.add(currentProcess);
+            }else{
+                Process temp = new Process(currentProcess);
+                temp.setStartTime(currentTime);
+                processOrder.add(temp);
+            }
+
+        }
+
+        if (currentProcess != null) {
+            // Decrease remaining service time for the current process
+            currentProcess.decreaseServTime();
+
+            currentTime++;  // Increment time after processing
+
+            if (currentProcess.getSrvTime() == 0) {
+                currentProcess.setFinishTime(currentTime);
+                currentProcess.setTurnAroundTime(currentProcess.getFinishTime() - currentProcess.getArrTime());
+                currentProcess.setWaitingTime(currentProcess.getTurnAroundTime() - currentProcess.getOriginalSrvTime()); // Assuming there's a method getOriginalSrvTime()
+                currentProcess = null;
+            }
+        } else {
+            // If no process to run, just increase the time
+            currentTime++;
+        }
     }
+    algorithmToString();
+    
+    }
+
+    public void algorithmToString(){
+        System.out.println("PP:");
+        for(Process p: processOrder){
+
+            System.out.println("T"+p.getStartTime()+ ": "+p.getPID()+"("+p.getPriority()+")");
+        }
+
+        // Collections.sort(processOrder, new Comparator<Process>() {
+        //     public int compare(Process p1, Process p2) {
+        //         return Integer.compare(p1.getPIDInt(), p2.getPIDInt());
+        //     }
+        // });
+        Set<Process> set = new HashSet<Process>(processOrder);
+        processOrder.clear();
+        processOrder.addAll(set);
+        System.out.println();
+        System.out.println("Process  Turnaround Time  Time Waiting");
+        String processFig = "";
+    
+        for(Process p: processOrder){
+
+            //System.out.println(p.getPID());
+            processFig += p.getPID();
+            
+            processFig += (" ".repeat(7));
+            processFig += p.getTurnAroundTime();
+            if((Integer.toString(p.getTurnAroundTime()).length() == 1)) processFig += (" ".repeat(17));
+            else processFig += (" ".repeat(16));
+            processFig += p.getWaitTime();
+            processFig +="\n";
+
+        }
+        System.out.print(processFig);
+
+    }}
     
 
