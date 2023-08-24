@@ -4,6 +4,8 @@ import java.util.List;
 public class FCFS{
     ArrayList<Process> currentProcesses;
     ArrayList<Process> completedProcesses = new ArrayList<Process>();
+    ArrayList<Process> pausedProcesses = new ArrayList<Process>();
+
     ArrayList<Process> originalProcesses = new ArrayList<Process>();
 
     ArrayList<Process> processOrder = new ArrayList<Process>();

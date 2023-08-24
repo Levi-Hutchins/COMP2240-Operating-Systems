@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afdd0dba-bd9b-4b66-adec-a6a8778da22a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Process.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Process.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Assignment 1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Assignment 1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/A1.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/A1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/A1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/A1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FCFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/FCFS.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FCFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FCFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PRR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PRR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Process.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Process.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Process.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Process.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SPN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SPN.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,19 +44,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "config",
-    "jdk.selected.JAVA_MODULE": "openjdk-17",
-    "last_opened_file_path": "/Users/levi/Library/CloudStorage/OneDrive-TheUniversityOfNewcastle/Bachelor of Computer Science/Year 2/COMP2240/Assignments/Assignment 1/src"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;algorithm__dev&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/levi/Library/CloudStorage/OneDrive-TheUniversityOfNewcastle/Bachelor of Computer Science/Year 2/COMP2240/Assignments/Assignment 1/src&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="A1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="A1" />
+      <module name="Assignment 1" />
+      <option name="PROGRAM_PARAMETERS" value="../data/datafile2.txt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.A1" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -71,5 +94,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/PRRT.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

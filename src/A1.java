@@ -11,6 +11,8 @@ public class A1 {
         A1 test = new A1();
         //test.readFileData(args[0]);
         int DISP = test.getDISP(args[0]);
+
+
         test.exe(test.getProcessesFromData(args[0]), DISP);
 
     }
@@ -18,9 +20,15 @@ public class A1 {
     public void exe(ArrayList<Process> processes, int DISP){
 
         FCFS fcfs = new FCFS(processes, DISP);
-        //fcfs.runAlgorithm(); //- Done Works
-        SPN spn = new SPN(processes, DISP);
-        spn.runAlgorithm();
+        //fcfs.runAlgorithm(); //- Done Tests Passed
+        //SPN spn = new SPN(processes, DISP);
+        //spn.runAlgorithm(); // - Done Tests Passed
+        PP pp = new PP(processes, DISP);
+        //pp.runAlgorithm();
+        //PreemptivePriority pptest = new PreemptivePriority(processes);
+        //pptest.test2();
+        PRRT prr = new PRRT(processes, DISP);
+        prr.test2();
 
   
         // for(int i = 0; i < processes.size(); i++){
@@ -55,7 +63,7 @@ public class A1 {
         int endCount = 0;
     
         try{ 
-            Scanner reader = new Scanner( new File(file));
+            Scanner reader = new Scanner(new File(file));
             while(reader.hasNextLine()){
                 String line = reader.nextLine();
                 if(line.contains("DISP")) DISP = Integer.parseInt(line.substring(6));

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Process {
     private String PID;
     private int ArrTime;
@@ -8,6 +10,7 @@ public class Process {
     private int finishTime;
     private int turnAroundTime;
     private int waitTime;
+    private int originalSrvTime;
 
     public Process(String PID, int arrTime,
                    int srvTime, int priority, int PIDInt_ ){
@@ -15,9 +18,10 @@ public class Process {
         this.PID = PID;
         this.ArrTime = arrTime;
         this.SrvTime = srvTime;
+        this.originalSrvTime = srvTime;
         this.Priority = priority;
         this.PIDInt = PIDInt_;
-
+                
         this.startTime = 0;
         this.finishTime = 0;
         this.turnAroundTime = 0;
@@ -26,7 +30,19 @@ public class Process {
 
 
     }
-
+    public Process(Process p){
+        this.PID = p.getPID();
+        this.ArrTime = p.getArrTime();
+        this.SrvTime = p.getSrvTime();
+        this.originalSrvTime = p.getSrvTime();
+        this.Priority = p.getPriority();
+        this.PIDInt = p.getPIDInt();
+                
+        this.startTime = 0;
+        this.finishTime = 0;
+        this.turnAroundTime = 0;
+        this.waitTime = 0;
+    }
 
 
     public int getArrTime() {
@@ -52,6 +68,9 @@ public class Process {
     public void setSrvTime(int srvTime) {
         SrvTime = srvTime;
     }
+    public int getOriginalSrvTime(){
+        return this.originalSrvTime;
+    }
 
     public String getPID() {
         return PID;
@@ -67,6 +86,7 @@ public class Process {
         return this.startTime;
     }
     public void setStartTime(int start_){
+        
         this.startTime = start_;
     }
     public int getFinishTime(){
@@ -86,6 +106,9 @@ public class Process {
     }
     public int getWaitTime(){
         return this.waitTime;
+    }
+    public void decreaseServTime(){
+        this.SrvTime -=1;
     }
 
 }

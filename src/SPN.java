@@ -59,7 +59,7 @@ public class SPN {
 
 
 
-        /*
+    /*
      * Desc: executes the FCFS algorithm and calls the toString function for output
      * @param: N/A
      * @return: N/A
