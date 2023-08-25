@@ -19,6 +19,13 @@ public class PP{
     
 
     }
+    /*
+     * Desc: 
+     * @param: 
+     * @return: 
+     * Precondition:  
+     * Postcondition: 
+     */
     public int getNextPausedProcessIndex(int currTime){
         if(pausedQueue.size() == 0)return -1;
         int highestPriority = pausedQueue.get(0).getPriority();
@@ -44,7 +51,14 @@ public class PP{
         }
         return priorIndex;
         }
-     
+        
+    /*
+     * Desc: 
+     * @param: 
+     * @return: 
+     * Precondition:  
+     * Postcondition: 
+     */
     public int getNextProcessIndex(int currTime){
         int highestPriority = currentProcesses.get(0).getPriority();
         int priorIndex = 0;
@@ -69,13 +83,19 @@ public class PP{
         }
         return priorIndex;
         }
-   
+    
+    /*
+     * Desc: 
+     * @param: 
+     * @return: 
+     * Precondition:  
+     * Postcondition: 
+     */    
     public void runAlgorithm(){
         Process currentItem;
         Process nextItem; 
         int currTime = 0;
         Process prevItem = currentProcesses.get(0);
-        Process pausedProcess;
 
         while(currentProcesses.size() != 0){
             currTime += this.DISP;
@@ -90,27 +110,8 @@ public class PP{
 
                 currTime += this.DISP;
             }
+
             processOrder.add(currentItem);
-
-
-
-            // int pausedIndex = getNextPausedProcessIndex(currTime);
-            // currentItem = currentProcesses.get(currIndex);
-
-            // if(pausedIndex != -1){
-            //     pausedProcess = pausedQueue.get(pausedIndex);
-            //     if(pausedProcess.getPriority() < currentItem.getPriority()){
-            //         currentItem = pausedProcess;
-            //         pausedQueue.remove(pausedProcess);
-            //     }
-
-            // }
-
-            
-
-
-
-            //int pausedIndex = getNextPausedProcessIndex(currTime);
             currentItem.decreaseServTime();;
             processOrder.add(currentItem);
 
@@ -118,34 +119,8 @@ public class PP{
                 pausedQueue.add(prevItem);
             }
             
-
-
             prevItem = currentItem;
             currentProcesses.remove(currentItem);
-
-
-            
-
-
-
-
-            // currentItem.setWaitingTime(currTime-currentItem.getArrTime());
-            // currentItem.editSrvTime(currTime);
-
-            
-            
-            
-            
-            
-            // currentItem.setStartTime(currTime);
-            // currTime += currentItem.getSrvTime();
-            // currentItem.setFinishTime(currTime);
-
-            // currentItem.setTurnAroundTime(currentItem.getFinishTime()-currentItem.getArrTime());
-            // processOrder.add(currentItem);
-            // completedProcesses.add(currentItem);
-            // currentProcesses.remove(nextProcessIndex); 
-
             
          }
          for(Process p:pausedQueue){

@@ -45,70 +45,26 @@ public class Process {
     }
 
 
-    public int getArrTime() {
-        return ArrTime;
-    }
+    public int getArrTime() {return ArrTime;}
+    public int getPriority() {return Priority;}
+    public int getSrvTime() {return SrvTime;}
+    public String getPID() {return PID;}
+    public int getPIDInt(){return PIDInt;}
+    public int getStartTime(){return this.startTime;}
+    public int getFinishTime(){return this.finishTime;}
+    public int getTurnAroundTime(){return this.turnAroundTime;}
+    public int getWaitTime(){return this.waitTime;}
 
-    public void setArrTime(int arrTime) {
-        ArrTime = arrTime;
-    }
 
-    public int getPriority() {
-        return Priority;
-    }
-
-    public void setPriority(int priority) {
-        Priority = priority;
-    }
-
-    public int getSrvTime() {
-        return SrvTime;
-    }
-
-    public void setSrvTime(int srvTime) {
-        SrvTime = srvTime;
-    }
-    public int getOriginalSrvTime(){
-        return this.originalSrvTime;
-    }
-
-    public String getPID() {
-        return PID;
-    }
-
-    public void setPID(String PID) {
-        this.PID = PID;
-    }
-    public int getPIDInt(){
-        return PIDInt;
-    }
-    public int getStartTime(){
-        return this.startTime;
-    }
-    public void setStartTime(int start_){
-        
-        this.startTime = start_;
-    }
-    public int getFinishTime(){
-        return this.finishTime;
-    }
-    public void setFinishTime(int finish_){
-        this.finishTime = finish_;
-    }
-    public int getTurnAroundTime(){
-        return this.turnAroundTime;
-    }
-    public void setTurnAroundTime(int time_){
-        this.turnAroundTime = time_;
-    }
-    public void setWaitingTime(int time_){
-        this.waitTime = time_;
-    }
-    public int getWaitTime(){
-        return this.waitTime;
-    }
-    public void decreaseServTime(){
-        this.SrvTime -=1;
-    }
+    public void setArrTime(int arrTime) { ArrTime = arrTime; }
+    public void setPriority(int priority_) { Priority = priority_; }
+    public void setSrvTime(int srvTime_) { SrvTime = srvTime_; }
+    public int getOriginalSrvTime(){ return this.originalSrvTime; }
+    public void decreaseServTime(){ this.SrvTime -=1; }
+    public void setPID(String PID) { this.PID = PID; }
+    public void setStartTime(int start_){ this.startTime = start_; }
+    public void setFinishTime(int finish_){ this.finishTime = finish_; }
+    public void setTurnAroundTime(int time_){ this.turnAroundTime = time_; }
+    public void setWaitingTime(int time_){ this.waitTime = time_; }
 
 }

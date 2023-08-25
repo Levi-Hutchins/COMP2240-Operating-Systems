@@ -20,13 +20,13 @@ public class A1 {
     public void exe(ArrayList<Process> processes, int DISP){
 
         FCFS fcfs = new FCFS(processes, DISP);
-        //fcfs.runAlgorithm(); //- Done Tests Passed
+        fcfs.runAlgorithm(); //- Done Tests Passed
         //SPN spn = new SPN(processes, DISP);
         //spn.runAlgorithm(); // - Done Tests Passed
         PP pp = new PP(processes, DISP);
         //pp.runAlgorithm();
-        PreemptivePriority pptest = new PreemptivePriority(processes);
-        pptest.myTest();
+        //PreemptivePriority pptest = new PreemptivePriority(processes);
+        //pptest.myTest();
         //PRR prr = new PRR(processes, DISP);
         //prr.runAlgorithm();
 

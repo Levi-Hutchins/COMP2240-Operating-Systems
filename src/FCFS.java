@@ -1,21 +1,19 @@
 import java.util.ArrayList;
-import java.util.List;
-
+/*
+ * Author: Levi Hutchins - C3386116
+ * This class implements a First Come First Served Scheduling algorithm.
+ * The next process is choosen based on arrival time (earliest first)
+ * 
+ */
 public class FCFS{
-    ArrayList<Process> currentProcesses;
-    ArrayList<Process> completedProcesses = new ArrayList<Process>();
-    ArrayList<Process> pausedProcesses = new ArrayList<Process>();
-
-    ArrayList<Process> originalProcesses = new ArrayList<Process>();
-
-    ArrayList<Process> processOrder = new ArrayList<Process>();
-    int DISP;
-
-
+    // Appropriate lists as well as DISP for incrementation
+    private ArrayList<Process> currentProcesses;
+    private ArrayList<Process> completedProcesses = new ArrayList<Process>();
+    private ArrayList<Process> processOrder = new ArrayList<Process>();
+    private int DISP;
 
     public FCFS(ArrayList<Process> currentProcesses_, int DISP_){
         this.currentProcesses = currentProcesses_;
-        this.originalProcesses = currentProcesses_;
         this.DISP = DISP_;
 
     }
@@ -51,9 +49,7 @@ public class FCFS{
 
 
         }
-    }
-    // return index of next process to be loaded
-    return arrIndex;
+    } return arrIndex;
     }
 
     
@@ -95,25 +91,22 @@ public class FCFS{
 
     }
     /*
-     * Desc: 
-     * @param: 
-     * @return: 
-     * Precondition:  
-     * Postcondition: 
+     * Desc: This function simply presents the results in the required format
+     * @param: N/A
+     * @return: N/A
+     * Precondition: The runAlgorithm function has successfully executed
+     * Postcondition: Correct output is displayed
      */
     public void algorithmToString(){
         System.out.println("FCFS:");
-        for(Process p: processOrder){
-
-            System.out.println("T"+p.getStartTime()+ ": "+p.getPID()+"("+p.getPriority()+")");
-        }
+        for(Process p: processOrder) System.out.println("T"+p.getStartTime()+ ": "+p.getPID()+"("+p.getPriority()+")");
+        
         System.out.println();
         System.out.println("Process  Turnaround Time  Time Waiting");
         String processFig = "";
 
         for(Process p: processOrder){
 
-            //System.out.println(p.getPID());
             processFig += p.getPID();
             
             processFig += (" ".repeat(7));
