@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class SPN {
+    // Appropriate lists as well as DISP for incrementation
     private ArrayList<Process> currentProcesses;
     private ArrayList<Process> completedProcesses = new ArrayList<Process>();
     private ArrayList<Process> processOrder = new ArrayList<Process>();
@@ -92,7 +93,7 @@ public class SPN {
             currentProcesses.remove(nextProcessIndex); // remove completed process   
         }
         //long endTime = System.nanoTime();
-        //System.out.println(endTime - startTime);
+        //System.out.println(endTime - startTime); - Used for my report getting avg over 3 runs
         algorithmToString();
     }
 
@@ -128,20 +129,31 @@ public class SPN {
         System.out.print(processFig);
 
     }
+
+    /*
+     * Desc: Calculates the turnaround time for all the processes
+     * @param: N/A
+     * @return: String val of Avg turnaround time
+     * Precondition: CompletedPrcesses is not null
+     * Postcondition: Average turnaround is calculated and returned
+     */
     public String getAvgTurnAroundTime(){
         double avgSum = 0;
-    
         for(Process p: completedProcesses)avgSum += p.getTurnAroundTime();
-        
-
         DecimalFormat f = new DecimalFormat("##.00");
         return f.format(avgSum / processOrder.size());
     }
+    
+    /*
+     * Desc: Calculates the Average waiting time for all the processes
+     * @param: N/A
+     * @return: String val of Avg wait time
+     * Precondition: CompletedPrcesses is not null
+     * Postcondition: Average wait time is calculated and returned
+     */
     public String getAvgWaitTime(){
         double avgSum = 0;
-    
         for(Process p: processOrder) avgSum += p.getWaitTime();
-        
         DecimalFormat f = new DecimalFormat("##.00");
         return f.format(avgSum / processOrder.size());
     }

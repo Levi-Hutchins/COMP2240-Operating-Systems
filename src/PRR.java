@@ -1,12 +1,9 @@
-
 /*
  * Author: Levi Hutchins - C3386116
  * Course Code: COMP2240
  * This class implements a Preemptive Round Robin Scheduling algorithm with a twist.
  * The processes are split into high and low priority queues depending their
  * assigned priorirty. High priority processes are assigned a quantum of 4 and low 2.
- * 
- * 
  */
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -32,6 +29,13 @@ public class PRR {
         this.DISP = DISP_;
     }
 
+    /*
+     * Desc: Adds processes to HPC or LPC depending on their priority
+     * @param: N/A
+     * @return: N/A
+     * Precondition: currentProcesses is not empty
+     * Postcondition: HPC or / and LPC are populated
+     */
     public void sortProcesses() {
         for (Process p : currentProcesses) {
             if (p.getPriority() > 2)
@@ -41,10 +45,24 @@ public class PRR {
         }
     }
 
+    /*
+     * Desc: Checks if a process is low priority or high
+     * @param: Process: process to be checked
+     * @return: boolean - in High process list or not
+     * Precondition: pcs exists and has valid priority
+     * Postcondition: return if pcs is high or low
+     */
     public boolean checkProcess(Process pcs) {
         return HPC.contains(pcs);
     }
 
+    /*
+     * Desc: Checks all processes current srvtime and return false if more time is required
+     * @param: N/A
+     * @return: boolean - not time left
+     * Precondition: currentProcesses is not empty
+     * Postcondition: returned if loop need to continue 
+     */
     private boolean allProcessesCompleted() {
         for (Process p : currentProcesses) {
             if (p.getSrvTime() > 0)
@@ -53,7 +71,13 @@ public class PRR {
         return true;
     }
         
-
+     /*
+     * Desc: Implements and executes the PRR algorithm
+     * @param: N/A
+     * @return: N/A
+     * Precondition: currentProcesses is not empty 
+     * Postcondition: completedProcesses equals currentProcesses original size
+     */
     public void runAlgorithm() {
         sortProcesses();
         int currentTime = 0;
@@ -72,9 +96,7 @@ public class PRR {
 
             if (!readyQueue.isEmpty()) {
                 currentTime += DISP; 
-
                 Process currentProcess = readyQueue.remove(0);
-
                 if (currentProcess.getStartTime() == 0) {
                     currentProcess.setStartTime(currentTime);
                     processOrder.add(currentProcess);
@@ -84,14 +106,11 @@ public class PRR {
                     processOrder.add(temp);
                 }
 
-
-
                 int timeQuantum = checkProcess(currentProcess) ? 4 : 2;
 
                 for (int q = 0; q < timeQuantum && currentProcess.getSrvTime() > 0; q++) {
                     currentProcess.decreaseServTime();
                     currentTime++;
-
                     // Check for newly arriving processes during execution
                     iter = notArrived.iterator();
                     while (iter.hasNext()) {
@@ -127,28 +146,26 @@ public class PRR {
     public void algorithmToString() {
         System.out.println("PRR:");
         for (Process p : processOrder) System.out.println("T" + p.getStartTime() + ": " + p.getPID() + "(" + p.getPriority() + ")");
-        
+
         System.out.println();
         System.out.println("Process  Turnaround Time  Time Waiting");
         String processFig = "";
 
+        // Sorts the processOrder arraylist in ascending order bases on PIDInt
         Collections.sort(completedProcesses, Comparator.comparingInt(process -> process.getPIDInt()));
 
+        // Generate the table in the correct format 
         for (Process p : completedProcesses) {
-
-        
+            
             processFig += p.getPID();
-
             processFig += (" ".repeat(7));
             processFig += p.getTurnAroundTime();
             if ((Integer.toString(p.getTurnAroundTime()).length() == 1)) processFig += (" ".repeat(17));
             else processFig += (" ".repeat(16));
             processFig += p.getWaitTime();
             processFig += "\n";
-
         }
         System.out.print(processFig);
-
     }
 
     /*
