@@ -1,6 +1,10 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 /*
  * Author: Levi Hutchins - C3386116
+ * Course Code: COMP2240
  * This class implements a First Come First Served Scheduling algorithm.
  * The next process is choosen based on arrival time (earliest first)
  * 
@@ -54,7 +58,7 @@ public class FCFS{
 
     
     /*
-     * Desc: executes the FCFS algorithm and calls the toString function for output
+     * Desc: Implements and executes the FCFS algorithm
      * @param: N/A
      * @return: N/A
      * Precondition: there must be a list of processes 
@@ -63,6 +67,7 @@ public class FCFS{
     public void runAlgorithm(){
         Process currentItem;
         int currTime = 0;
+        long startTime = System.nanoTime();
         // loop while there are processes left        
         while(currentProcesses.size() != 0){
             //if(currentProcesses.size() > 0){
@@ -71,7 +76,7 @@ public class FCFS{
             int nextProcessIndex = getNextProcessIndex();
             currTime += this.DISP;
             // add service time to current time 
-            currentItem = currentProcesses.get(nextProcessIndex);
+            currentItem = new Process(currentProcesses.get(nextProcessIndex));
             currentItem.setWaitingTime(currTime-currentItem.getArrTime());
             currentItem.setStartTime(currTime);
             // add process finish time to the process
@@ -86,7 +91,8 @@ public class FCFS{
 
             //}
          }
-        System.out.println("Done");
+        //long endTime = System.nanoTime();
+        //System.out.println(endTime - startTime); - Used for my report getting avg over 3 runs
         algorithmToString();
 
     }
@@ -105,20 +111,38 @@ public class FCFS{
         System.out.println("Process  Turnaround Time  Time Waiting");
         String processFig = "";
 
+        // Sorts the processOrder arraylist in ascending order bases on PIDInt
+        Collections.sort(processOrder, Comparator.comparingInt(process -> process.getPIDInt()));
+        
+        // Generate the table in the correct format 
         for(Process p: processOrder){
 
             processFig += p.getPID();
-            
             processFig += (" ".repeat(7));
             processFig += p.getTurnAroundTime();
             if((Integer.toString(p.getTurnAroundTime()).length() == 1)) processFig += (" ".repeat(17));
             else processFig += (" ".repeat(16));
             processFig += p.getWaitTime();
             processFig +="\n";
-
         }
         System.out.print(processFig);
 
+    }
+    public String getAvgTurnAroundTime(){
+        double avgSum = 0;
+    
+        for(Process p: completedProcesses) avgSum += p.getTurnAroundTime();
+        
+        DecimalFormat f = new DecimalFormat("##.00");
+        return f.format(avgSum / completedProcesses.size());
+    }
+    public String getAvgWaitTime(){
+        double avgSum = 0;
+    
+        for(Process p: completedProcesses) avgSum += p.getWaitTime();
+        
+        DecimalFormat f = new DecimalFormat("##.00");
+        return f.format(avgSum / completedProcesses.size());
     }
     
 

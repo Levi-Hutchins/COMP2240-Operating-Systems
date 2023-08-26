@@ -18,23 +18,31 @@ public class A1 {
     }
 
     public void exe(ArrayList<Process> processes, int DISP){
-
-        FCFS fcfs = new FCFS(processes, DISP);
+        FCFS fcfs = new FCFS(new ArrayList<>(processes), DISP);
         fcfs.runAlgorithm(); //- Done Tests Passed
-        //SPN spn = new SPN(processes, DISP);
-        //spn.runAlgorithm(); // - Done Tests Passed
-        PP pp = new PP(processes, DISP);
-        //pp.runAlgorithm();
-        //PreemptivePriority pptest = new PreemptivePriority(processes);
-        //pptest.myTest();
-        //PRR prr = new PRR(processes, DISP);
-        //prr.runAlgorithm();
+        System.out.println("");
+
+        SPN spn = new SPN(new ArrayList<>(processes), DISP);
+        spn.runAlgorithm(); // - Done Tests Passed
+        System.out.println("");
+
+        PP pp = new PP(new ArrayList<>(processes), DISP);
+        pp.runAlgorithm(); // - Done Tests Passed
+        System.out.println("");
+
+        PRR prr = new PRR(processes, DISP);
+        prr.runAlgorithm(); // - Done Tests Passed
+        System.out.println("");
+        
+        System.out.println("Summary");
+        System.out.println("Algorithm\tAverage Turnaround Time \tAverage Waiting Time");
+        System.out.println("FCFS     \t"+fcfs.getAvgTurnAroundTime()+("\t".repeat(4))+fcfs.getAvgWaitTime());
+        System.out.println("SPN     \t"+spn.getAvgTurnAroundTime()+("\t".repeat(4))+spn.getAvgWaitTime());
+        System.out.println("PP      \t"+pp.getAvgTurnAroundTime()+("\t".repeat(4))+pp.getAvgWaitTime());
+        System.out.println("PRR     \t"+prr.getAvgTurnAroundTime()+("\t".repeat(4))+prr.getAvgWaitTime());
 
   
-        // for(int i = 0; i < processes.size(); i++){
-        //     if(i == 0 ) continue;
-        //     System.out.println("Process "+ i +" "+processes.get(i).getPIDInt());
-        // }
+        
     }
     public int getDISP(String file){
         int DISP = 0;
@@ -93,12 +101,10 @@ public class A1 {
         catch(FileNotFoundException e){ System.out.println("An Error Occured");}
         
 
-        // for(Process p: processes ){
-        //     System.out.println(p.getPID());
-        // }
 
         return processes;
     }
+    
   
     
 }
