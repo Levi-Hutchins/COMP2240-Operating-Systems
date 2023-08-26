@@ -82,16 +82,14 @@ public class PP {
                 // Decrease remaining service time for the current process
                 currentProcess.decreaseServTime();
                 currentTime++; 
-                if (currentProcess.getSrvTime() == 0) {
+                if (currentProcess.getSrvTime() == 0) { // Perform necessary calculations
                     currentProcess.setFinishTime(currentTime);
                     currentProcess.setTurnAroundTime(currentProcess.getFinishTime() - currentProcess.getArrTime());
-                    if(currentProcess.getPIDInt() == 1){
-                    }
                     currentProcess.setWaitingTime(currentProcess.getTurnAroundTime() - currentProcess.getOriginalSrvTime()); 
                     completedProcesses.add(currentProcess);
                     currentProcess = null;
                 }
-            } //else  currentTime++; // If no process to run, just increase the time
+            } 
         }
         //long endTime = System.nanoTime(); 
         //System.out.println((endTime-startTime));  - Used for my report getting avg over 3 runs
@@ -109,16 +107,15 @@ public class PP {
         System.out.println("PP:");
         for (Process p : processOrder)System.out.println("T" + p.getStartTime() + ": " + p.getPID() + "(" + p.getPriority() + ")");
         
-        // Sorts the processOrder arraylist in ascending order bases on PIDInt
+        // Sorts the processOrder arraylist in ascending order based on PIDInt
         Collections.sort(completedProcesses, Comparator.comparingInt(process -> process.getPIDInt()));
         System.out.println();
-        System.out.println("Process  Turnaround Time  Time Waiting");
+        System.out.println("Process  Turnaround Time  Waiting Time");
         String processFig = "";
 
         // Generate the table in the correct format 
         for (Process p : completedProcesses) {
 
-            // System.out.println(p.getPID());
             processFig += p.getPID();
             processFig += (" ".repeat(7));
             processFig += p.getTurnAroundTime();
@@ -130,20 +127,30 @@ public class PP {
         } System.out.print(processFig);
 
     }
+    /*
+     * Desc: Calculates the turnaround time for all the processes
+     * @param: N/A
+     * @return: String val of Avg turnaround time
+     * Precondition: CompletedPrcesses is not null
+     * Postcondition: Average turnaround is calculated and returned
+     */
     public String getAvgTurnAroundTime(){
         double avgSum = 0;
-    
         for(Process p: completedProcesses) avgSum += p.getTurnAroundTime();
-        
         DecimalFormat f = new DecimalFormat("##.00");
         return f.format(avgSum / completedProcesses.size());
     }
+
+    /*
+     * Desc: Calculates the turnaround time for all the processes
+     * @param: N/A
+     * @return: String val of Avg turnaround time
+     * Precondition: CompletedPrcesses is not null
+     * Postcondition: Average turnaround is calculated and returned
+     */
     public String getAvgWaitTime(){
         double avgSum = 0;
-    
         for(Process p: completedProcesses) avgSum += p.getWaitTime();
-        
-        
         DecimalFormat f = new DecimalFormat("##.00");
         return f.format(avgSum / completedProcesses.size());
     }

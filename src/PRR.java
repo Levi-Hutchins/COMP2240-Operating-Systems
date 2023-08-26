@@ -38,10 +38,8 @@ public class PRR {
      */
     public void sortProcesses() {
         for (Process p : currentProcesses) {
-            if (p.getPriority() > 2)
-                LPC.add(p);
-            else
-                HPC.add(p);
+            if (p.getPriority() > 2) LPC.add(p);
+            else HPC.add(p);
         }
     }
 
@@ -65,8 +63,7 @@ public class PRR {
      */
     private boolean allProcessesCompleted() {
         for (Process p : currentProcesses) {
-            if (p.getSrvTime() > 0)
-                return false;
+            if (p.getSrvTime() > 0) return false;
         }
         return true;
     }
@@ -137,7 +134,7 @@ public class PRR {
 
         }
         // long endTime = System.nanoTime();
-        // System.out.println(endTime-startTime); - Used for my report getting avg over
+        // System.out.println(endTime-startTime); - Used for my report getting avg over 3 runs
         // 3 runs
 
         algorithmToString();
@@ -148,7 +145,7 @@ public class PRR {
         for (Process p : processOrder) System.out.println("T" + p.getStartTime() + ": " + p.getPID() + "(" + p.getPriority() + ")");
 
         System.out.println();
-        System.out.println("Process  Turnaround Time  Time Waiting");
+        System.out.println("Process  Turnaround Time  Waiting Time");
         String processFig = "";
 
         // Sorts the processOrder arraylist in ascending order bases on PIDInt
@@ -156,7 +153,7 @@ public class PRR {
 
         // Generate the table in the correct format 
         for (Process p : completedProcesses) {
-            
+
             processFig += p.getPID();
             processFig += (" ".repeat(7));
             processFig += p.getTurnAroundTime();

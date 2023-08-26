@@ -67,7 +67,7 @@ public class FCFS{
     public void runAlgorithm(){
         Process currentItem;
         int currTime = 0;
-        long startTime = System.nanoTime();
+        //long startTime = System.nanoTime();
         // loop while there are processes left        
         while(currentProcesses.size() != 0){
             //if(currentProcesses.size() > 0){

@@ -109,7 +109,7 @@ public class SPN {
         for(Process p: processOrder) System.out.println("T"+p.getStartTime()+ ": "+p.getPID()+"("+p.getPriority()+")");
     
         System.out.println();
-        System.out.println("Process  Turnaround Time  Time Waiting");
+        System.out.println("Process  Turnaround Time  Waiting Time");
         String processFig = "";
 
         // Sorts the processOrder arraylist in ascending order bases on PIDInt
@@ -143,7 +143,7 @@ public class SPN {
         DecimalFormat f = new DecimalFormat("##.00");
         return f.format(avgSum / processOrder.size());
     }
-    
+
     /*
      * Desc: Calculates the Average waiting time for all the processes
      * @param: N/A

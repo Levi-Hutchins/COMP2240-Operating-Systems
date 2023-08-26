@@ -22,7 +22,7 @@ public class Process {
         this.turnAroundTime = 0;
         this.waitTime = 0;
     }
-    // This constructor allows me to copy a existing process and making changes without
+    // This constructor allows me to copy a existing process and make changes without
     // those changes being reflected in the copied object
     public Process(Process p){
         this.PID = p.getPID();
